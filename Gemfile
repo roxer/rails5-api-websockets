@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
+ruby '2.2.3'
 
 gem 'rails', github: "rails/rails"
 gem 'sprockets-rails', github: "rails/sprockets-rails"
 gem 'sprockets', github: "rails/sprockets"
+gem 'actioncable', github: 'rails/actioncable'
 gem 'sass-rails', github: "rails/sass-rails"
 gem 'arel', github: "rails/arel"
 gem 'rack', github: "rack/rack"
@@ -13,6 +15,9 @@ gem 'sqlite3'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', github: "rails/coffee-rails"
+gem 'puma'
+gem 'redis'
+gem 'rack-cors'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -31,10 +36,17 @@ gem 'jbuilder', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'active_model_serializers', '~> 0.10.0.rc2'
+gem 'factory_girl_rails'
+gem 'swagger-docs'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry-byebug'
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rubocop', require: false
+  gem 'yard', '~> 0.8.7.6'
 end
 
 group :development do

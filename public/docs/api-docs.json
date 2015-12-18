@@ -1,0 +1,19 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000//",
+  "apis": [
+    {
+      "path": "docs/api/v1/canvases.{format}",
+      "description": "Canvases"
+    }
+  ],
+  "info": {
+    "title": "Diagraroo App",
+    "description": "This is an API for an online real-time diagram editor",
+    "termsOfServiceUrl": "https://github.com/roxer/rails-5-api-websockets",
+    "contact": "roxermc@gmail.com",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/roxer/rails5-api-websockets/blob/master/LICENSE"
+  }
+}

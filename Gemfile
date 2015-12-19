@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.2.3'
 
-gem 'rails', github: "rails/rails"
+gem 'rails', '5.0.0.beta1'
 gem 'sprockets-rails', github: "rails/sprockets-rails"
 gem 'sprockets', github: "rails/sprockets"
-gem 'actioncable', github: 'rails/actioncable'
 gem 'sass-rails', github: "rails/sass-rails"
 gem 'arel', github: "rails/arel"
 gem 'rack', github: "rack/rack"
@@ -44,6 +43,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'awesome_print'
   gem 'rspec-rails', '~> 3.0.0'
   gem 'rubocop', require: false
   gem 'yard', '~> 0.8.7.6'

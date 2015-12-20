@@ -108,9 +108,10 @@ class Api::V1::CanvasesController < ApplicationController
         redirect_to api_v1_canvases_url, notice: 'Canvas was successfully destroyed.'
       end
 
-      format.json do head :no_content
+      format.json do
         msg = { id: id }
         broadcast("deleted", msg)
+        head :no_content
       end
     end
   end

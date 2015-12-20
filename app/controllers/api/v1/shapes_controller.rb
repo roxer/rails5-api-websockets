@@ -120,6 +120,7 @@ class Api::V1::ShapesController < ApplicationController
   # DELETE /api/v1/shapes/1
   # DELETE /api/v1/shapes/1.json
   def destroy
+    id = @api_v1_shape.id
     @api_v1_shape.destroy
     respond_to do |format|
       format.html do
@@ -127,9 +128,9 @@ class Api::V1::ShapesController < ApplicationController
       end
 
       format.json do
-        head :no_content
         msg = { id: id }
         broadcast("deleted", msg)
+        head :no_content
       end
     end
   end

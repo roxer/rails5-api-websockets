@@ -51,6 +51,7 @@
       "operations": [
         {
           "summary": "Creates a new Canvas",
+          "notes": "TODO ...",
           "parameters": [
             {
               "paramType": "form",
@@ -87,6 +88,7 @@
       "operations": [
         {
           "summary": "Fetches a single Canvas item",
+          "notes": "TODO ...",
           "parameters": [
             {
               "paramType": "path",
@@ -128,6 +130,7 @@
       "operations": [
         {
           "summary": "Deletes an existing Canvas item",
+          "notes": "TODO ...",
           "parameters": [
             {
               "paramType": "path",
@@ -154,5 +157,24 @@
         }
       ]
     }
-  ]
+  ],
+  "models": {
+    "Canvas": {
+      "id": "Canvas",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Canvas Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name"
+        }
+      },
+      "description": "A Canvas object."
+    }
+  }
 }

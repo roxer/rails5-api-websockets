@@ -21,6 +21,7 @@ class Api::V1::CanvasesController < ApplicationController
 
   swagger_api :show do
     summary "Fetches a single Canvas item"
+    notes "TODO ..."
     param :path, :id, :integer, :optional, "Canvas Id"
     response :ok, "Success", :Book
     response :unauthorized
@@ -34,6 +35,7 @@ class Api::V1::CanvasesController < ApplicationController
 
   swagger_api :create do
     summary "Creates a new Canvas"
+    notes "TODO ..."
     param :form, :name, :string, :required, "Name"
     response :created, "Success", :Canvas
     response :unauthorized
@@ -92,6 +94,7 @@ class Api::V1::CanvasesController < ApplicationController
   swagger_api :destroy do
     summary "Deletes an existing Canvas item"
     param :path, :id, :integer, :required, "Canvas Id"
+    notes "TODO ..."
     response :unauthorized
     response :not_found
   end
@@ -112,6 +115,13 @@ class Api::V1::CanvasesController < ApplicationController
     end
   end
 
+  swagger_model :Canvas do
+    description "A Canvas object."
+    property :id, :integer, :required, "Canvas Id"
+    property :name, :string, :optional, "Name"
+  end
+
+
   ######################################################################################
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -127,9 +137,8 @@ class Api::V1::CanvasesController < ApplicationController
     end
 
     def broadcast(action, msg)
-      msg = { action => msg }.to_json
-
-      ActionCable.server.broadcast("diagram_1", msg)
+      msg = { action: { event: action, type: 'canvas' }, body: msg }.to_json
+      ActionCable.server.broadcast(@diagram, msg)
     end
 end
 

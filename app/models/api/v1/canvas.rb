@@ -1,5 +1,6 @@
 class Api::V1::Canvas < ActiveRecord::Base
   belongs_to :diagram
+  has_many   :shapes
 
   before_validation :set_default_diagram
 

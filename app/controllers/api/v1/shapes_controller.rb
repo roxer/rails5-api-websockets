@@ -52,7 +52,12 @@ class Api::V1::ShapesController < ApplicationController
           redirect_to @api_v1_shape, notice: 'Shape was successfully created.'
         end
 
-        format.json { render :show, status: :created, location: @api_v1_shape }
+        format.json do
+          msg = render_to_string(action: 'show', layout: false)
+          broadcast("created", JSON.parse(msg))
+          render :show, status: :created, location: @api_v1_shape
+        end
+
       else
         format.html { render :new }
         format.json { render json: @api_v1_shape.errors, status: :unprocessable_entity }
@@ -159,7 +164,7 @@ class Api::V1::ShapesController < ApplicationController
     end
 
     def broadcast(action, msg)
-      msg = { shape: action, data: msg }.to_json
+      msg = { action: { event: action, type: 'shape' }, body: msg }.to_json
       ActionCable.server.broadcast(@diagram, msg)
     end
 

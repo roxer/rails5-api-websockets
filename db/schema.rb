@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216065921) do
+ActiveRecord::Schema.define(version: 20151218210922) do
 
   create_table "api_v1_canvases", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20151216065921) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "api_v1_shapes", force: :cascade do |t|
+    t.string   "label"
+    t.string   "type"
+    t.integer  "canvas_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["canvas_id"], name: "index_api_v1_shapes_on_canvas_id"
   end
 
 end

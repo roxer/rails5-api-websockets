@@ -6,6 +6,10 @@
     {
       "path": "docs/api/v1/canvases.{format}",
       "description": "Canvases"
+    },
+    {
+      "path": "docs/api/v1/shapes.{format}",
+      "description": "Shapes"
     }
   ],
   "info": {

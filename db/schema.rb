@@ -29,7 +29,8 @@ ActiveRecord::Schema.define(version: 20151218210922) do
 
   create_table "api_v1_shapes", force: :cascade do |t|
     t.string   "label"
-    t.string   "type"
+    t.string   "shape_type"
+    t.text   "descriptors"
     t.integer  "canvas_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

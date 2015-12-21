@@ -1,11 +1,11 @@
 class CreateApiV1Shapes < ActiveRecord::Migration[5.0]
   def change
     create_table :api_v1_shapes do |t|
-      t.string :label
-      t.string :shape_type
-      t.text   :descriptors
-      t.integer :pos_x
-      t.integer :pos_y
+      t.string :label, null: false
+      t.string :shape_type, null: false
+      t.text   :descriptors, null: false
+      t.integer :pos_x, null: false
+      t.integer :pos_y, null: false
       t.references :canvas, index: true, foreign_key: true
 
       t.timestamps

@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
   before_action :set_diagram
 
   #######################################################################################
+
   private
 
-    def set_diagram
-      d = Api::V1::Diagram.find_by_name('default')
-      @diagram = "diagram_#{d.id}"
-    end
-
+  def set_diagram
+    d = Api::V1::Diagram.find_by_name('default')
+    @diagram = "diagram_#{d.id}"
+  end
 end

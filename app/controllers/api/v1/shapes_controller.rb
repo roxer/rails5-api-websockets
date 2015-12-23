@@ -30,12 +30,12 @@ class Api::V1::ShapesController < ApplicationController
 
   swagger_api :create do
     summary "Creates a new Shape"
-    notes "TODO ..." # TODO ...
+    notes "TODO ..." # TODO: ...
     param :form, :canvas_id, :integer, :required, "Canvas ID"
     param :form, :label, :string, :required, "Label"
     param :form, :pos_x, :integer, :required, "Pos_X"
     param :form, :pos_y, :integer, :required, "Pos_Y"
-    param_list :form, :shape_type, :string, :required, "Shape Type", ["Circle", "Rectangle"]
+    param_list :form, :shape_type, :string, :required, "Shape Type", %w(Circle Rectangle)
     param :form, :descriptors, :string, :required, "Descriptors"
     response :created, "Success", :Shape
     response :unauthorized
@@ -82,7 +82,7 @@ class Api::V1::ShapesController < ApplicationController
       ActiveRecord::Base.transaction do
         # obtain an exclusive lock on the selected row
         @api_v1_shape = Api::V1::Shape.lock.find(params[:id])
-        # TODO test deleting record durring lock for update
+        # TODO: test deleting record durring lock for update
         # sleep 20
 
         if @api_v1_shape.update!(api_v1_shape_params)
@@ -100,20 +100,19 @@ class Api::V1::ShapesController < ApplicationController
           format.html { render :edit }
           format.json { render json: @api_v1_shape.errors, status: :unprocessable_entity }
         end
-
       end
     end
   rescue ActiveRecord::RecordNotFound
     render json: '{"error": "record not found"}', status: 404
   rescue => e
     logger.error "shape update error #{e.message} #{e.backtrace}"
-    render json: %Q({"error": "something went wrong ... #{e.message}"}), status: 500
+    render json: %({ "error": "something went wrong ... #{e.message}" }), status: 500
   end
 
   swagger_api :destroy do
     summary "Deletes an existing Shape item"
     param :path, :id, :integer, :required, "Shape Id"
-    notes "TODO ..."
+    notes "TODO: ..."
     response :unauthorized
     response :not_found
   end
@@ -147,26 +146,26 @@ class Api::V1::ShapesController < ApplicationController
     property :Descriptors, :string, :required, "Descriptors", example: des
   end
 
+  #######################################################################################
 
-  ########################################################################################
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_shape
-      @api_v1_shape = Api::V1::Shape.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render json: '{"error": "record not found"}', status: 404
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_api_v1_shape
+    @api_v1_shape = Api::V1::Shape.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: '{"error": "record not found"}', status: 404
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def api_v1_shape_params
-      params.permit(:label, :shape_type, :canvas_id, :pos_x,
-                    :pos_y, :descriptors)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def api_v1_shape_params
+    params.permit(:label, :shape_type, :canvas_id, :pos_x,
+                  :pos_y, :descriptors
+                 )
+  end
 
-    def broadcast(action, msg)
-      msg = { action: { event: action, type: 'shape' }, body: msg }.to_json
-      ActionCable.server.broadcast(@diagram, msg)
-    end
-
+  def broadcast(action, msg)
+    msg = { action: { event: action, type: 'shape' }, body: msg }.to_json
+    ActionCable.server.broadcast(@diagram, msg)
+  end
 end

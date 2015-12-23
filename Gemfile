@@ -23,7 +23,8 @@ gem 'rack-cors'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+# Turbolinks makes following links in your web application faster.
+# Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -47,13 +48,15 @@ group :development, :test do
   gem 'awesome_print'
   gem 'rspec-rails', '~> 3.0.0'
   gem 'rubocop', require: false
+  gem 'reek', require: false
   gem 'yard', '~> 0.8.7.6'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', github: 'rails/web-console'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Spring speeds up development by keeping your application running in the background.
+  # Read more: https://github.com/rails/spring
   gem 'spring'
 
   # Loading the listen gem enables an evented file system monitor. Check

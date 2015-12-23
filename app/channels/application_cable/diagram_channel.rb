@@ -6,5 +6,4 @@ class DiagramChannel < ApplicationCable::Channel
 
   def unsubscribed
   end
-
 end

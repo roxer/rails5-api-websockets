@@ -122,24 +122,24 @@ class Api::V1::CanvasesController < ApplicationController
     property :name, :string, :optional, "Name"
   end
 
-
   ######################################################################################
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_canvas
-      @api_v1_canvas = Api::V1::Canvas.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render json: '{"error": "record not found"}', status: 404
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def api_v1_canvas_params
-      params.permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_api_v1_canvas
+    @api_v1_canvas = Api::V1::Canvas.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: '{"error": "record not found"}', status: 404
+  end
 
-    def broadcast(action, msg)
-      msg = { action: { event: action, type: 'canvas' }, body: msg }.to_json
-      ActionCable.server.broadcast(@diagram, msg)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def api_v1_canvas_params
+    params.permit(:name)
+  end
+
+  def broadcast(action, msg)
+    msg = { action: { event: action, type: 'canvas' }, body: msg }.to_json
+    ActionCable.server.broadcast(@diagram, msg)
+  end
 end
-

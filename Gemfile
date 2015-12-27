@@ -10,6 +10,7 @@ gem 'rack', github: "rack/rack"
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'pg'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -42,6 +43,7 @@ gem 'swagger-docs'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'dotenv-rails'
   gem 'byebug'
   gem 'pry-byebug'
   gem 'pry-rails'

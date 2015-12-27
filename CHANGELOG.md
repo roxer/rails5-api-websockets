@@ -1,10 +1,21 @@
-# v0.1
+# CHANGELOG
 
-Initial commit
+## v0.4
 
-# v0.2
+### Docker configuration
 
-## Work In Progress for testing purposes
+* added .env to meet one of goals http://12factor.net/
+* setup process for docker
+
+## v0.3
+
+### Work In Progress for testing purposes
+
+* fix seeds data
+
+## v0.2
+
+### Work In Progress for testing purposes
 
 * swagger UI available at path /swagger/
 
@@ -14,8 +25,7 @@ Initial commit
 
 * broadcasted messages are showed at path /messages/
 
-# v0.3
+## v0.1
 
-## Work In Progress for testing purposes
+Initial commit
 
-* fix seeds data

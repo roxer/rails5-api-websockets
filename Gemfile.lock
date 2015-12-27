@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rack/rack.git
-  revision: 2859a5b1dd26047f637b5aa9369d94a2a544a2a4
+  revision: 7cb3772a03f1b713622f68e178f90a71a66aff0d
   specs:
     rack (2.0.0.alpha)
       json
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets.git
-  revision: 030b7ccdea92b756aab1b8d3620cc7991d98090d
+  revision: 47ac6ad00408bd1636e522e8977324e5138e74a4
   specs:
     sprockets (4.0.0)
       concurrent-ruby (~> 1.0)
@@ -154,6 +154,9 @@ GEM
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
+    dotenv (2.0.1)
+    dotenv-rails (2.0.1)
+      dotenv (= 2.0.1)
     em-hiredis (0.3.0)
       eventmachine (~> 1.0)
       hiredis (~> 0.5.0)
@@ -175,8 +178,8 @@ GEM
     hitimes (1.2.3)
     i18n (0.7.0)
     ice_nine (0.11.1)
-    jbuilder (2.3.2)
-      activesupport (>= 3.0.0, < 5)
+    jbuilder (2.4.0)
+      activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
@@ -198,6 +201,7 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     parser (2.2.3.0)
       ast (>= 1.1, < 3.0)
+    pg (0.18.4)
     powerpack (0.1.1)
     private_attr (1.1.0)
     procto (0.0.2)
@@ -243,7 +247,7 @@ GEM
     rainbow (2.0.0)
     rake (10.4.2)
     redis (3.2.2)
-    reek (3.7.1)
+    reek (3.8.0)
       codeclimate-engine-rb (~> 0.1.0)
       parser (~> 2.2, >= 2.2.2.5)
       private_attr (~> 1.1)
@@ -275,7 +279,7 @@ GEM
     ruby-progressbar (1.7.5)
     sass (3.4.20)
     slop (3.6.0)
-    spring (1.6.0)
+    spring (1.6.1)
     sqlite3 (1.3.11)
     swagger-docs (0.1.9)
       activesupport (>= 3, < 5)
@@ -319,9 +323,11 @@ DEPENDENCIES
   awesome_print
   byebug
   coffee-rails!
+  dotenv-rails
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
+  pg
   pry-byebug
   pry-rails
   puma
@@ -345,4 +351,4 @@ DEPENDENCIES
   yard (~> 0.8.7.6)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

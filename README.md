@@ -26,24 +26,36 @@ bundle exec rake db:setup
 
 * Deployment instructions - TODO
 
+* Docker setup
+
+```
+docker-compose build
+docker-compose run --rm web rake db:setup
+docker-machine ls
+docker-machine ip default
+add to /etc/hosts "docker.machine.ip.result ws.local"
+docker-compose up
+
+open url 1 browser - http://ws.local:3000/messages
+open url 2 browser - http://ws.local:3000/messages
+open url 3 browser - http://ws.local:3000/messages
+open url - http://ws.local:3000/swagger
+```
+
 * Local demo
 
 ```
 cd rails5-api-websockets
 bundle exec puma -p 28080 cable/config.ru
 cd rails5-api-websockets
+cp .env_tmpl .env
 bundle exec rails server
 
-open url - http://localhost:3000/swagger#/
 open url 1 browser - http://localhost:3000/messages
 open url 2 browser - http://localhost:3000/messages
 open url 3 browser - http://localhost:3000/messages
+open url - http://localhost:3000/swagger
 ```
-
-
-
-config/initializers/ams_json_adapter.rb
-config/initializers/inflections.rb
 
 HACK
 swager docs - add to base_path "//" at the end
@@ -52,4 +64,8 @@ TODO
 api_key for authorization
 travis.ci or jenkins for continous integration
 changer json format (e.g. ember requires root node)
+
+config/initializers/ams_json_adapter.rb
+config/initializers/inflections.rb
+
 

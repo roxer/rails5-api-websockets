@@ -1,5 +1,6 @@
 ## README
 
+{<img src="https://gemnasium.com/ctran/annotate_models.png" />}[https://gemnasium.com/ctran/annotate_models]
 
 * Ruby version - 2.2.3
 

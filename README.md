@@ -1,6 +1,6 @@
 ## README
 
-{<img src="https://gemnasium.com/ctran/annotate_models.png" />}[https://gemnasium.com/ctran/annotate_models]
+[![Dependency Status](https://gemnasium.com/roxer/rails5-api-websockets.png)](https://gemnasium.com/roxer/rails5-api-websockets)
 
 * Ruby version - 2.2.3
 

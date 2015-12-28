@@ -1,4 +1,6 @@
-FROM ubuntu:15.10
+FROM debian:jessie
+# prefer debian over ubuntu
+
 MAINTAINER Pawel Przylucki <roxermc@gmail.com> (@roxer)
 
 WORKDIR /app
@@ -21,6 +23,7 @@ RUN apt-get update && \
       python-software-properties \
       libffi-dev \
       nodejs \
+    \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean \
     && git clone https://github.com/rbenv/rbenv.git ~/.rbenv \

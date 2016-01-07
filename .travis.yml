@@ -1,7 +1,10 @@
-
 language: ruby
+services:
+  - postgresql
 rvm:
  - 2.2.3
+ before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - bin/rails db:create RAILS_ENV=test
   - bin/rails db:migrate RAILS_ENV=test

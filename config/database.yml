@@ -17,9 +17,9 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: ":memory:"
-  timeout: 500
+  adapter: postgresql
+  database: travis_ci_test
+  username: postgres
 
 production:
   <<: *default

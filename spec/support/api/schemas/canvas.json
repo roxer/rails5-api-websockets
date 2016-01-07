@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": { "type": "string" },
+    "id": { "type": "integer" },
+    "diagram_id": { "type": "integer" },
+    "created_at" : { "type" : "string", "format": "date-time" },
+    "updated_at" : { "type" : "string", "format": "date-time" }
+  }
+}

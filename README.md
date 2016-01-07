@@ -3,7 +3,7 @@
 [![CI build by travis-ci.org](https://travis-ci.org/roxer/rails5-api-websockets.svg?branch=master)](https://travis-ci.org/roxer/rails5-api-websockets.svg?branch=master)
 [![Dependency Status](https://gemnasium.com/roxer/rails5-api-websockets.png)](https://gemnasium.com/roxer/rails5-api-websockets)
 [![Coverage Status](https://coveralls.io/repos/roxer/rails5-api-websockets/badge.png?branch=master&service=github)](https://coveralls.io/github/roxer/rails5-api-websockets?branch=master)
-
+[![Code Climate](https://codeclimate.com/github/roxer/rails5-api-websockets.png)](https://codeclimate.com/github/roxer/rails5-api-websockets)
 
 * Ruby version - 2.2.3
 

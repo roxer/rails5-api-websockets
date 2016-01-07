@@ -18,6 +18,7 @@ gem 'coffee-rails', github: "rails/coffee-rails"
 gem 'puma'
 gem 'redis'
 gem 'rack-cors'
+gem 'coveralls', require: false
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -38,8 +39,9 @@ gem 'jbuilder', '~> 2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'active_model_serializers', '~> 0.10.0.rc2'
-gem 'factory_girl_rails'
 gem 'swagger-docs'
+gem 'rails-controller-testing'
+gem 'rollbar', '~> 2.5.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,21 +51,34 @@ group :development, :test do
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'simplecov', require: false
   gem 'rubocop', require: false
   gem 'reek', require: false
   gem 'yard', '~> 0.8.7.6'
+  gem 'factory_girl_rails'
+  # help to kill N+1 queries and unused eager loading
+  gem 'bullet'
+  gem 'bundler-audit', require: false
+  gem 'faker'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', github: 'rails/web-console'
+  gem 'quiet_assets'
   # Spring speeds up development by keeping your application running in the background.
   # Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
 
   # Loading the listen gem enables an evented file system monitor. Check
   # https://github.com/guard/listen#listen-adapters if on Windows or *BSD.
   # gem 'listen', '~> 3.0.5'
+end
+
+group :test do
+  gem 'shoulda-matchers', require: false
+  gem 'json-schema'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

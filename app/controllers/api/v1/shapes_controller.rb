@@ -83,9 +83,8 @@ class Api::V1::ShapesController < ApplicationController
         # obtain an exclusive lock on the selected row
         @api_v1_shape = Api::V1::Shape.lock.find(params[:id])
         # TODO: test deleting record durring lock for update
-        # sleep 20
 
-        if @api_v1_shape.update!(api_v1_shape_params)
+        if @api_v1_shape.update(api_v1_shape_params)
           format.html do
             redirect_to @api_v1_shape, notice: 'Shape was successfully updated.'
           end

@@ -31,6 +31,7 @@ class Api::V1::CanvasesController < ApplicationController
   # GET /api/v1/canvases/1
   # GET /api/v1/canvases/1.json
   def show
+    @api_v1_canvas = Api::V1::Canvas.find(params[:id])
   end
 
   swagger_api :create do

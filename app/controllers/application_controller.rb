@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_diagram
-    d = Api::V1::Diagram.find_by_name('default')
+    d = Api::V1::Diagram.find_or_create_by(name: 'default')
     @diagram = "diagram_#{d.id}"
   end
 end

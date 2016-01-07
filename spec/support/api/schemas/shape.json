@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": [
+    "label",
+    "shape_type",
+    "descriptors",
+    "pos_x",
+    "pos_y",
+    "canvas_id",
+    "id"
+  ],
+  "properties": {
+    "label": { "type": "string" },
+    "descriptors": { "type": "string" },
+    "shape_type": { "type": "string" },
+    "id": { "type": "integer" },
+    "canvas_id": { "type": "integer" },
+    "pos_x": { "type": "integer" },
+    "pos_y": { "type": "integer" },
+    "created_at" : { "type" : "string", "format": "date-time" },
+    "updated_at" : { "type" : "string", "format": "date-time" }
+  }
+}

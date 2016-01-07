@@ -1,34 +1,31 @@
 require "rails_helper"
 
-RSpec.describe Api::V1::CanvasesController, :type => :routing do
+RSpec.describe Api::V1::CanvasesController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(:get => "/api/v1s").to route_to("api/v1s#index")
-    end
-
-    it "routes to #new" do
-      expect(:get => "/api/v1s/new").to route_to("api/v1s#new")
+      expect(get: "/api/v1/canvases.json")
+             .to route_to("api/v1/canvases#index", format: "json")
     end
 
     it "routes to #show" do
-      expect(:get => "/api/v1s/1").to route_to("api/v1s#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/api/v1s/1/edit").to route_to("api/v1s#edit", :id => "1")
+      expect(get: "/api/v1/canvases/1.json")
+             .to route_to("api/v1/canvases#show", id: "1", format: "json")
     end
 
     it "routes to #create" do
-      expect(:post => "/api/v1s").to route_to("api/v1s#create")
+      expect(post: "/api/v1/canvases.json")
+             .to route_to("api/v1/canvases#create", format: "json")
     end
 
     it "routes to #update" do
-      expect(:put => "/api/v1s/1").to route_to("api/v1s#update", :id => "1")
+      expect(put: "/api/v1/canvases/1.json")
+             .to route_to("api/v1/canvases#update", id: "1", format: "json")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/api/v1s/1").to route_to("api/v1s#destroy", :id => "1")
+      expect(delete: "/api/v1/canvases/1.json")
+             .to route_to("api/v1/canvases#destroy", id: "1", format: "json")
     end
 
   end

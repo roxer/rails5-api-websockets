@@ -1,6 +1,6 @@
 ## README
 
-[![CI build by travis-ci.org](https://travis-ci.org/roxer/rails5-api-websockets.svg?branch=master)](https://travis-ci.org/roxer/rails5-api-websockets.svg?branch=master)
+[![CI build by travis-ci.org](https://travis-ci.org/roxer/rails5-api-websockets.svg?branch=master)](https://travis-ci.org/roxer/rails5-api-websockets)
 [![Dependency Status](https://gemnasium.com/roxer/rails5-api-websockets.png)](https://gemnasium.com/roxer/rails5-api-websockets)
 [![Coverage Status](https://coveralls.io/repos/roxer/rails5-api-websockets/badge.png?branch=master&service=github)](https://coveralls.io/github/roxer/rails5-api-websockets?branch=master)
 [![Code Climate](https://codeclimate.com/github/roxer/rails5-api-websockets.png)](https://codeclimate.com/github/roxer/rails5-api-websockets)
@@ -9,7 +9,7 @@
 
 * Configuration
 
-```
+```sh
 brew install rbenv
 rbnev install 2.2.3
 brew install redis
@@ -20,7 +20,7 @@ bundle install
 
 * Database initialization
 
-```
+```sh
 bundle exec rake db:setup
 ```
 
@@ -32,7 +32,7 @@ bundle exec rake db:setup
 
 * Docker setup
 
-```
+```sh
 docker-compose build
 docker-compose run --rm web rake db:setup
 docker-machine ls
@@ -48,7 +48,7 @@ open url - http://ws.local:3000/swagger
 
 * Local demo
 
-```
+```sh
 cd rails5-api-websockets
 bundle exec puma -p 28080 cable/config.ru
 cd rails5-api-websockets

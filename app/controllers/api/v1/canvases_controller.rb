@@ -46,7 +46,6 @@ class Api::V1::CanvasesController < ApplicationController
   # POST /api/v1/canvases.json
   def create
     @api_v1_canvas = Api::V1::Canvas.new(api_v1_canvas_params)
-    @api_v1_canvas.diagram_id = 1
 
     respond_to do |format|
       if @api_v1_canvas.save
@@ -136,7 +135,7 @@ class Api::V1::CanvasesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def api_v1_canvas_params
-    params.permit(:name)
+    params.permit(:name, :diagram_id)
   end
 
   def broadcast(action, msg)

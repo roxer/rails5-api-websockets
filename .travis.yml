@@ -1,7 +1,11 @@
-
 language: ruby
+services:
+  - postgresql
+  - redis-server
 rvm:
  - 2.2.3
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
-  - bin/rake db:setup RAILS_ENV=test
-  - bin/rake
+  - bin/rails db:schema:load RAILS_ENV=test
+  - bundle exec rspec spec

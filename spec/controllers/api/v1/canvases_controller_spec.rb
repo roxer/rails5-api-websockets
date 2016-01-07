@@ -28,12 +28,12 @@ RSpec.describe Api::V1::CanvasesController, :type => :controller do
   let(:diagram) { Api::V1::Diagram.create(name: 'default') }
   let(:valid_attributes) {
     # skip("Add a hash of attributes valid for your model")
-    { name: 'canvas 1', diagram: diagram }
+    { name: 'canvas 1', diagram_id: diagram.id }
   }
 
   let(:invalid_attributes) {
     # skip("Add a hash of attributes invalid for your model")
-    { name: '', diagram: diagram }
+    { name: '', diagram_id: diagram.id }
   }
 
   # This should return the minimal set of values that should be in the session

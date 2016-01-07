@@ -14,28 +14,28 @@
 ActiveRecord::Schema.define(version: 20151218210922) do
 
   create_table "api_v1_canvases", force: :cascade do |t|
-    t.string   "name", null: false
-    t.integer  "diagram_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",              null: false
+    t.integer  "diagram_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["diagram_id"], name: "index_api_v1_canvases_on_diagram_id"
   end
 
   create_table "api_v1_diagrams", force: :cascade do |t|
-    t.string   "name", null: false
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "api_v1_shapes", force: :cascade do |t|
-    t.string   "label", null: false
-    t.string   "shape_type", null: false
-    t.text   "descriptors", null: false
-    t.integer  "pos_x", null: false
-    t.integer  "pos_y", null: false
-    t.integer  "canvas_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "label",       null: false
+    t.string   "shape_type",  null: false
+    t.text     "descriptors", null: false
+    t.integer  "pos_x",       null: false
+    t.integer  "pos_y",       null: false
+    t.integer  "canvas_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["canvas_id"], name: "index_api_v1_shapes_on_canvas_id"
   end
 

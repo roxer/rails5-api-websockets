@@ -1,6 +1,7 @@
 ## README
 
 [![Dependency Status](https://gemnasium.com/roxer/rails5-api-websockets.png)](https://gemnasium.com/roxer/rails5-api-websockets)
+[![Coverage Status](https://coveralls.io/repos/roxer/rails5-api-websockets/badge.png?branch=master&service=github)](https://coveralls.io/github/roxer/rails5-api-websockets?branch=master)
 
 * Ruby version - 2.2.3
 

@@ -5,6 +5,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'simplecov'
+require 'coveralls'
+Coveralls.wear!
 SimpleCov.start 'rails'
 # require 'rails-controller-testing'
 

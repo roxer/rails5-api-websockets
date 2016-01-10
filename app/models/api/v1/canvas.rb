@@ -2,7 +2,7 @@ class Api::V1::Canvas < ActiveRecord::Base
   belongs_to :diagram
   has_many :shapes
 
-  before_create :set_default_diagram
+  after_initialize :set_default_diagram, on: :create
 
   validates :name, presence: true
   validates :diagram_id, presence: true
@@ -17,7 +17,9 @@ class Api::V1::Canvas < ActiveRecord::Base
   private
 
   def set_default_diagram
-    d = Api::V1::Diagram.find_or_create_by(name: 'default')
-    self.diagram = d if d.present?
+    unless persisted?
+      d = Api::V1::Diagram.find_or_create_by(name: 'default')
+      self.diagram = d
+    end
   end
 end

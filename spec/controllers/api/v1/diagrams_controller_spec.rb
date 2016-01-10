@@ -25,12 +25,10 @@ RSpec.describe Api::V1::DiagramsController, :type => :controller do
   # Api::V1::Diagram. As you add validations to Api::V1::Diagram, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    # skip("Add a hash of attributes valid for your model")
-    { name: 'default' }
+    { name: 'diagram name' }
   }
 
   let(:invalid_attributes) {
-    # skip("Add a hash of attributes invalid for your model")
     { name: '' }
   }
 

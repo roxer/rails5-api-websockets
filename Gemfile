@@ -41,8 +41,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'active_model_serializers', '~> 0.10.0.rc2'
 gem 'swagger-docs'
 gem 'rails-controller-testing'
-gem 'rollbar', '~> 2.7.1'
 
+group :production do
+  gem 'skylight'
+  gem 'rollbar', '~> 2.7.1'
+end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'dotenv-rails'

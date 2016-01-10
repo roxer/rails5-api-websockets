@@ -27,12 +27,10 @@ RSpec.describe Api::V1::CanvasesController, :type => :controller do
   # adjust the attributes here as well.
   let(:diagram) { Api::V1::Diagram.create(name: 'default') }
   let(:valid_attributes) {
-    # skip("Add a hash of attributes valid for your model")
-    { name: 'canvas 1', diagram_id: diagram.id }
+    { name: 'canvas 1' }
   }
 
   let(:invalid_attributes) {
-    # skip("Add a hash of attributes invalid for your model")
     { name: '', diagram_id: diagram.id }
   }
 

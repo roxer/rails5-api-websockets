@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::Canvas, :type => :model do
+RSpec.describe Api::V1::Canvas, type: :model do
   it 'has a valid factory' do
     expect(FactoryGirl.create(:api_v1_canvas)).to be_valid
   end

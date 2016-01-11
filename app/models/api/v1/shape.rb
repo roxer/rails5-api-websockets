@@ -25,7 +25,7 @@ class Api::V1::Shape < ActiveRecord::Base
   def check_descriptors
     unless shape_type.blank?
       schema = File.read JSON_SCHEMA + "/#{shape_type.downcase}.json"
-      unless JSON::Validator.validate(schema, descriptors, strict: true)
+      unless JSON::Validator.validate(schema, descriptors, strict: false)
         errors.add(:descriptors, 'Shape must be valid to json schema - http://ow.ly/WSpIN')
       end
     end

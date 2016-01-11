@@ -1,9 +1,16 @@
 {
-  "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema",
-  "required": ["side_x", "side_y"],
+  "title": "Rectangle",
+  "description": "A rectangle from diagroo app - http://ow.ly/WSX8I",
+  "type": "object",
+  "required": ["width", "height"],
   "properties": {
-    "side_x": { "type": "integer", "minimum": 1 },
-    "side_y": { "type": "integer", "minimum": 1 }
+    "width": { "type": "integer", "minimum": 1 },
+    "height": { "type": "integer", "minimum": 1 },
+    "rotation": {
+      "type": "number",
+      "minimum": -360,
+      "maximum": 360
+    }
   }
 }

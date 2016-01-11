@@ -1,8 +1,14 @@
 {
-  "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "Circle",
+  "description": "A circle from diagroo app - http://ow.ly/WSXio",
+  "type": "object",
   "properties": {
-    "radius": { "type": "integer", "minimum": 0 }
+    "radius": {
+      "type": "integer",
+      "minimum": 0,
+      "exclusiveMinimum": true
+    }
   },
   "required": ["radius"]
 }

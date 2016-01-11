@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "required": ["side_x", "side_y"],
+  "properties": {
+    "side_x": { "type": "integer", "minimum": 1 },
+    "side_y": { "type": "integer", "minimum": 1 }
+  }
+}

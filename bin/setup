@@ -16,7 +16,7 @@ chdir APP_ROOT do
 
   puts '== Installing dependencies =='
   system! 'gem install bundler --conservative'
-  system('bundle check') or system!('bundle install')
+  system('bundle check') or system!('bundle install -j4')
 
   # puts "\n== Copying sample files =="
   # unless File.exist?('config/database.yml')
@@ -28,7 +28,4 @@ chdir APP_ROOT do
 
   puts "\n== Removing old logs and tempfiles =="
   system! 'ruby bin/rake log:clear tmp:clear'
-
-  puts "\n== Restarting application server =="
-  system! 'ruby bin/rake restart'
 end

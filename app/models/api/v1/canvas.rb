@@ -1,6 +1,6 @@
 class Api::V1::Canvas < ActiveRecord::Base
   belongs_to :diagram
-  has_many :shapes
+  has_many :shapes, dependent: :destroy
 
   after_initialize :set_default_diagram, on: :create
 

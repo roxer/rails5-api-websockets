@@ -15,16 +15,14 @@ rbnev install 2.2.3
 brew install redis
 brew services redis start
 git clone git@github.com:roxer/rails5-api-websockets.git && cd rails5-api-websockets
-bundle install
+./bin/setup
 ```
 
-* Database initialization
+* How to run the test suite
 
 ```sh
-bundle exec rake db:setup
+bundle exec rspec spec
 ```
-
-* How to run the test suite - TODO
 
 * Services (job queues, cache servers, search engines, etc.) - TODO
 
@@ -33,6 +31,8 @@ bundle exec rake db:setup
 * Docker setup
 
 ```sh
+docker-machine start default
+eval "$(docker-machine env default)"
 docker-compose build
 docker-compose run --rm web rake db:setup
 docker-machine ls
@@ -53,6 +53,7 @@ cd rails5-api-websockets
 bundle exec puma -p 28080 cable/config.ru
 cd rails5-api-websockets
 cp .env_tmpl .env
+cp .env_tmpl .env.test
 bundle exec rails server
 
 open url 1 browser - http://localhost:3000/messages

@@ -19,6 +19,7 @@ gem 'puma'
 gem 'redis'
 gem 'rack-cors'
 gem 'coveralls', require: false
+gem 'activerecord_json_validator'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

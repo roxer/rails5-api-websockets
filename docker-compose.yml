@@ -1,57 +1,85 @@
 ---
-# Our Postgresql service:
-postgres:
-  container_name: postgres
-  image: postgres
-  environment:
-    # LC_ALL: pl_PL.UTF-8
-    POSTGRES_PASSWORD: 3x1mpl3
-    POSTGRES_DB: example_db
-  ports:
-    - '5432:5432' # Bind host port 5432 to PostgreSQL port 5432
+version: '2'
 
-# Our Redis service:
-redis:
-  container_name: redis
-  image: redis
-  ports:
-    - '6379:6379' # Bind host port 6379 to Redis port 6379
+services:
+  # Our Postgresql service:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      # LC_ALL: pl_PL.UTF-8
+      POSTGRES_PASSWORD: 3x1mpl3
+      POSTGRES_DB: example_db
+    ports:
+      - '5432:5432' # Bind host port 5432 to PostgreSQL port 5432
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
 
-# Application: --------------------------------------------------------------------------
-# We'll also use this configuration (&app_base) for the websocket server
-web: &app_base
-  container_name: web
-  build: .
-  command: bundle exec rails s -p 3000 -b '0.0.0.0'
-  volumes:
-    - .:/app
-  ports:
-    - '3000:3000' # Bind host port 3000 to app HTTP port 3000
-  links: &app_links
-    - postgres:postgres.local
-    - redis:redis.local
-  environment: &app_environment
-    # PostgreSQL Development Database:
-    DATABASE_URL: postgres://postgres:3x1mpl3@postgres.local:5432/example_db?pool=25&encoding=unicode&schema_search_path=public
+  # Our Redis service:
+  redis:
+    container_name: redis
+    image: 'redis:3.2-alpine'
+    command: redis-server --requirepass yourpassword
+    ports:
+      - '6379:6379' # Bind host port 6379 to Redis port 6379
+    volumes:
+      - 'redis:/var/lib/redis/data'
 
-    # Redis Database:
-    REDIS_URL: redis://redis.local:6379
-    WS_URL: ws://ws.local:28080
+  # Application: --------------------------------------------------------------------------
+  # We'll also use this configuration (&app_base) for the websocket server and sidekiq
+  web: &app_base
+    container_name: web
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/app
+    ports:
+      - '3000:3000' # Bind host port 3000 to app HTTP port 3000
+    links: &app_links
+      - postgres:postgres.local
+      - redis:redis.local
+    environment: &app_environment
+      # PostgreSQL Development Database:
+      DATABASE_URL: postgres://postgres:3x1mpl3@postgres.local:5432/example_db?pool=25&encoding=unicode&schema_search_path=public
 
-    # Enable the byebug debugging server - this can be overriden
-    # from the command line:
-    ENABLE_DEBUG_SERVER: 'true'
+      # Redis Database:
+      REDIS_URL: redis://redis.local:6379
+      WS_URL: ws://ws.local:28080
 
-    # Run the app in the 'development' environment:
-    RACK_ENV: development
-    RAILS_ENV: development
-  # It's fine for development, do not do it in production:
+      # Enable the byebug debugging server - this can be overriden
+      # from the command line:
+      ENABLE_DEBUG_SERVER: 'true'
 
-# Application: --------------------------------------------------------------------------
-# websocket server
-web2:
-  container_name: web2
-  <<: *app_base
-  command: bundle exec puma -b tcp://0.0.0.0:28080 cable/config.ru
-  ports:
-    - '28080:28080'
+      # Run the app in the 'development' environment:
+      RACK_ENV: development
+      RAILS_ENV: development
+    # It's fine for development, do not do it in production:
+
+  # Application: --------------------------------------------------------------------------
+  # websocket server
+  cable:
+    container_name: cable
+    <<: *app_base
+    command: bundle exec puma -b tcp://0.0.0.0:28080 cable/config.ru
+    ports:
+      - '28080:28080'
+
+  sidekiq:
+    container_name: sidekiq
+    <<: *app_base
+    ports:
+      - '3100:3000' # Bind host port 3000 to app HTTP port 3000
+    command: sidekiq -C config/sidekiq.yml.erb
+    links:
+      - redis:redis.local
+    volumes:
+      - .:/app
+    # env_file:
+    #   - '.env'
+
+volumes:
+  redis:
+  postgres:

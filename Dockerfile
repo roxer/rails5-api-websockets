@@ -1,9 +1,8 @@
-FROM debian:jessie
-# prefer debian over ubuntu
+FROM phusion/passenger-full
+# we want to test several rubies
+# prefer baseimage over ubuntu/debian and alpine
 
 MAINTAINER Pawel Przylucki <roxermc@gmail.com> (@roxer)
-
-WORKDIR /app
 
 RUN apt-get update && \
     apt-get install -y --force-yes \
@@ -25,31 +24,17 @@ RUN apt-get update && \
       nodejs \
     \
     && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean \
-    && git clone https://github.com/rbenv/rbenv.git ~/.rbenv \
-    && git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build \
-    && /root/.rbenv/plugins/ruby-build/install.sh
+    && apt-get clean
 
-# ruby2.2 \
-# ruby=1:2.1.5 \
-# nodejs=0.10.29~dfsg-2 && \
-
-ENV echo 'eval "$(rbenv init -)"' >> /etc/profile
-ENV PATH /root/.rbenv/shims:/root/.rbenv/bin:$PATH
 ENV CONFIGURE_OPTS --disable-install-doc
 
-# Install ruby 2.2.3
-RUN rbenv install 2.2.3 \
-    && rbenv rehash \
-    && echo 'gem: --no-rdoc --no-ri' >> /.gemrc \
-    && rbenv global 2.2.3 \
-    && gem install bundler
+WORKDIR /app
+COPY Gemfile      /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+RUN gem install bundler
+RUN bundle install  --binstubs --jobs 20 --retry 5
 
-ADD Gemfile      /app/Gemfile
-ADD Gemfile.lock /app/Gemfile.lock
-RUN bundle install -j4
-
-ADD . /app
+COPY . /app
 
 # TODO: create user for app (other than root)
 

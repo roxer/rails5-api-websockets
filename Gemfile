@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.3.1'
 
-gem 'rails', '5.0.0.beta1'
+gem 'rails', '5.0.0.1'
 gem 'sprockets-rails', github: "rails/sprockets-rails"
 gem 'sprockets', github: "rails/sprockets"
 gem 'sass-rails', github: "rails/sass-rails"
@@ -11,6 +11,7 @@ gem 'rack', github: "rack/rack"
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'pg'
+gem 'pundit'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -20,6 +21,7 @@ gem 'redis'
 gem 'rack-cors'
 gem 'coveralls', require: false
 gem 'activerecord_json_validator'
+gem 'sidekiq'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -39,7 +41,7 @@ gem 'jbuilder', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'active_model_serializers', '~> 0.10.0.rc2'
+gem 'active_model_serializers', '~> 0.10.2'
 gem 'swagger-docs'
 gem 'rails-controller-testing'
 
@@ -54,7 +56,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'awesome_print'
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.5.2'
   gem 'simplecov', require: false
   gem 'rubocop', require: false
   gem 'reek', require: false
@@ -69,7 +71,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', github: 'rails/web-console'
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
   # Spring speeds up development by keeping your application running in the background.
   # Read more: https://github.com/rails/spring
   gem 'spring'

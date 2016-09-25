@@ -6,7 +6,7 @@ class CreateApiV1Shapes < ActiveRecord::Migration[5.0]
       t.text   :descriptors, null: false
       t.integer :pos_x, null: false
       t.integer :pos_y, null: false
-      t.references :canvas, index: true, foreign_key: true
+      t.references :api_v1_canvas, index: true, foreign_key: true
 
       t.timestamps
     end

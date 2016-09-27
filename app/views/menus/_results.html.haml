@@ -1,0 +1,5 @@
+= # display_query_sql(@places)
+%h2= display_menu_results_header(@search.result.size)
+%table.table.table-striped
+  %thead= display_menu_sort_column_headers(@search)
+  %tbody= display_menu_search_results(@menus)

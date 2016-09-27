@@ -1,0 +1,6 @@
+= # display_query_sql(@places)
+%h2= display_results_header(@search.result.size)
+
+%table.table.table-striped
+  %thead= display_sort_column_headers(@search) #, escape_attributes: false
+  %tbody= display_search_results(@venues) #,       escape_attributes: false

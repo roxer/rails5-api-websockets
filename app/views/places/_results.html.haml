@@ -1,0 +1,6 @@
+= # display_query_sql(@places)
+%h2= display_place_results_header(@search.result.size)
+
+%table.table.table-striped
+  %thead= display_place_sort_column_headers(@search)
+  %tbody= display_place_search_results(@places)

@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%h1 Menus
+
+- if params[:place_id]
+  = search_form_for @search, url: place_menus_path do |f|
+
+    %fieldset
+      %legend 'Search Menus'
+      %ul
+        %li
+          = f.label 'Notes'
+          = f.text_field :notes_cont
+        %li
+          = f.label 'Sheduled on from'
+          = f.text_field :sheduled_on_gteq
+        %li
+          = f.label 'Sheduled on to'
+          = f.text_field :sheduled_on_lteq
+        %li
+          = f.label 'Export to json'
+          = f.check_box :json_export
+      = submit_tag 'Apply'
+
+= will_paginate @menus
+= render 'results'
+= will_paginate @menus

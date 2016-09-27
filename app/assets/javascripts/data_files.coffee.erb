@@ -1,0 +1,33 @@
+#= require action_cable
+
+@App = {}
+App.cable = ActionCable.createConsumer()
+
+App.data_files = App.cable.subscriptions.create { channel: "DataFileChannel", data_file_id: gon.data_file_id },
+  received: (data) ->
+    @appendLine(data)
+
+  appendLine: (data) ->
+    html = @createLine(data)
+    $( "#mess" ).prepend(html)
+    $( "article:hidden:first" ).fadeIn( "slow" )
+
+  createLine: (data) ->
+    data_p = JSON.parse(data)
+    event  = data_p.action.event || 'default'
+    action = JSON.stringify(data_p.action.event)
+    body   = JSON.stringify(data_p.body)
+    console.log action
+
+    bgcolor = switch
+              when event == 'finished' then '#F7EDED'
+              when event == 'started'  then '#EBF7F0'
+              when event == 'updated'  then '#FCF6DB'
+              else 'white'
+
+    """
+    <article class="chat-line" style="display:none;background:#{bgcolor}">
+      <span class="action">#{action}</span>
+      <span class="body">#{body}</span>
+    </article>
+    """

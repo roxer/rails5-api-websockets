@@ -1,0 +1,34 @@
+%h1 Upload files
+
+#mess
+
+= form_for @data_file, html: { multipart: true } do |f|
+  Menu
+  = f.file_field :menu
+  %hr
+  Menu Page
+  = f.file_field :menu_page
+  %hr
+  Menu Item
+  = f.file_field :menu_item
+  %hr
+  Dish
+  = f.file_field :dish
+  %hr
+  = submit_tag
+
+%h2 Or give URL to each file
+= form_for @data_file, html: { multipart: true } do |f|
+  Menu
+  = f.text_field :remote_menu_url
+  %hr
+  Menu Page
+  = f.text_field :remote_menu_page_url
+  %hr
+  Menu Item
+  = f.text_field :remote_menu_item_url
+  %hr
+  Dish
+  = f.text_field :remote_dish_url
+  %hr
+  = submit_tag

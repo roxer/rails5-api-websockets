@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%h1 Events
+
+= search_form_for @search do |f|
+
+  %fieldset
+    %legend 'Search Place'
+    %ul
+      %li
+        = f.label 'Name'
+        = f.text_field :name_cont
+    = submit_tag 'Apply'
+
+= will_paginate @events
+= render 'results'
+= will_paginate @events

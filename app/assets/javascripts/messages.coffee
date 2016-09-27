@@ -17,7 +17,7 @@ App.messages = App.cable.subscriptions.create { channel: "DiagramChannel", diagr
     action = JSON.stringify(data_p.action)
     body = JSON.stringify(data_p.body)
     console.log action
-    
+
     bgcolor = switch
       when event == 'deleted' then '#F7EDED'
       when event == 'created' then '#EBF7F0'

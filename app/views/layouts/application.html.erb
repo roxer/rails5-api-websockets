@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Rails5 WebSockets Demo</title>
+    <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= action_cable_meta_tag %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -9,8 +10,44 @@
   </head>
 
   <body>
+  <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Restaurants Demo</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Places", places_path %></li>
+          <li><%= link_to "Venues", venues_path %></li>
+          <li><%= link_to "Events", events_path %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "Import Data", new_data_file_path %></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="container master-container">
+    <ul class="breadcrumb">
+      <%= yield :breadcrumb %>
+    </ul>
+
+    <% if notice %>
+      <div class="alert alert-success fade in" data-alert="alert">
+        <a class="close" data-dismiss='alert' href="#">×</a>
+        <p><%= notice %></p>
+      </div>
+    <% end %>
 
     <%= yield %>
+  </div>
 
-  </body>
+  <footer class="footer">
+    <div class="container">
+      <p>Copyright &copy; <%= Time.now.year %> <a href="https:/github.com/roxer">P. Przyłucki</a></p>
+    </div>
+  </footer>
+</body>
 </html>

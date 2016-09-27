@@ -2,11 +2,13 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'rails', '5.0.0.1'
-gem 'sprockets-rails', github: "rails/sprockets-rails"
-gem 'sprockets', github: "rails/sprockets"
-gem 'sass-rails', github: "rails/sass-rails"
-gem 'arel', github: "rails/arel"
-gem 'rack', github: "rack/rack"
+# gem 'sprockets-rails', github: "rails/sprockets-rails"
+# gem 'sprockets', github: "rails/sprockets"
+# gem 'arel', github: "rails/arel"
+# gem 'rack', github: "rack/rack"
+gem 'sass-rails', '~> 5.0'
+# gem 'bootstrap', '~> 4.0.0.alpha4'
+gem 'bootstrap-sass', '~> 3.3.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -15,13 +17,26 @@ gem 'pundit'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', github: "rails/coffee-rails"
+gem 'coffee-rails', github: 'rails/coffee-rails'
 gem 'puma'
+gem 'hamlit'
 gem 'redis'
+# gem 'em-hiredis'
 gem 'rack-cors'
 gem 'coveralls', require: false
 gem 'activerecord_json_validator'
-gem 'sidekiq'
+gem 'sidekiq', '4.2.1'
+gem 'activerecord-import'
+gem 'parallel'
+gem 'ransack'
+gem 'gon'
+gem 'simple_form'
+gem 'will_paginate', github: 'jonatack/will_paginate'
+# gem 'paperclip', '5.1.0'
+gem 'carrierwave', '1.0.0.beta'
+# gem 'sinatra', '~> 1.4.7', require: false
+# gem 'smarter_csv'
+# gem 'fastercsv'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -79,7 +94,7 @@ group :development do
 
   # Loading the listen gem enables an evented file system monitor. Check
   # https://github.com/guard/listen#listen-adapters if on Windows or *BSD.
-  # gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.0.5'
 end
 
 group :test do

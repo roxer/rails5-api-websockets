@@ -1,0 +1,2 @@
+class MenusVenue < ApplicationRecord
+end

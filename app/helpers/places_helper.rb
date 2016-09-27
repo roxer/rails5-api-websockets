@@ -16,6 +16,7 @@ module PlacesHelper
     end
   end
 
+  # REVIEW table headers
   def display_place_sort_column_headers(search)
     res = event_column_headers.reduce(String.new) do |string, field|
             string << (content_tag('th', sort_link(search, field, {}, method: action)))
@@ -32,6 +33,7 @@ module PlacesHelper
     end.html_safe
   end
 
+  # REVIEW table row
   def display_place_search_results_row(object)
     res = event_column_fields.reduce(String.new) do |string, field|
             string << (content_tag('td', object.send(field)))

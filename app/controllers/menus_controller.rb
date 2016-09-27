@@ -4,6 +4,7 @@ class MenusController < ApplicationController
     @search = ransack_params
     @menus = ransack_result
 
+    # REVIEW export to json if user opts to with checkbox
     if (params[:q][:json_export].to_i == 1 rescue false)
       render formats: :json
     end

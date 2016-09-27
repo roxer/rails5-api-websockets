@@ -3,6 +3,7 @@
 @App = {}
 App.cable = ActionCable.createConsumer()
 
+<%# REVIEW dislpay messages broadcasted via websockets %>
 App.data_files = App.cable.subscriptions.create { channel: "DataFileChannel", data_file_id: gon.data_file_id },
   received: (data) ->
     @appendLine(data)

@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 class Dish < ApplicationRecord
   mount_uploader :datafile, DishUploader

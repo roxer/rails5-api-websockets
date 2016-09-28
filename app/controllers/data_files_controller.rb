@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 class DataFilesController < ApplicationController
   before_action :set_data_file, only: [:show]
@@ -11,7 +12,7 @@ class DataFilesController < ApplicationController
   end
 
   def show
-    gon.push({data_file_id: @data_file.id})
+    gon.push(data_file_id: @data_file.id)
   end
 
   def create

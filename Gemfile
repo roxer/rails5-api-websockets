@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 source 'https://rubygems.org'
 ruby '2.3.1'
@@ -74,7 +75,10 @@ group :development, :test do
   gem 'awesome_print'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'simplecov', require: false
-  gem 'rubocop', require: false
+  gem 'rubocop', github: 'bbatsov/rubocop',
+                 ref: '2e64123f2f61516dcc9776eba0ccfda87a998afb',
+                 require: false
+
   gem 'reek', require: false
   gem 'yard', '~> 0.8.7.6'
   gem 'factory_girl_rails'

@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 class Api::V1::ShapesController < ApplicationController
   before_action :set_api_v1_shape, only: [:show, :edit, :destroy]
@@ -127,7 +128,7 @@ class Api::V1::ShapesController < ApplicationController
       end
 
       format.json do
-        msg = { id: id }
+        msg = {id: id}
         broadcast("deleted", msg)
         head :no_content
       end
@@ -135,7 +136,7 @@ class Api::V1::ShapesController < ApplicationController
   end
 
   swagger_model :Shape do
-    des = { radius: 10 }.to_json
+    des = {radius: 10}.to_json
     description "A Shape object."
     property :id, :integer, :required, "Shape Id"
     property :canvas_id, :integer, :required, "Canvas Id"
@@ -159,13 +160,14 @@ class Api::V1::ShapesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def api_v1_shape_params
-    params.permit(:label, :shape_type, :canvas_id, :pos_x,
-                  :pos_y, :descriptors
-                 )
+    params.permit(
+      :label, :shape_type, :canvas_id, :pos_x,
+      :pos_y, :descriptors
+    )
   end
 
   def broadcast(action, msg)
-    msg = { action: { event: action, type: 'shape' }, body: msg }.to_json
+    msg = {action: {event: action, type: 'shape'}, body: msg}.to_json
     ActionCable.server.broadcast(@diagram, msg)
   end
 end

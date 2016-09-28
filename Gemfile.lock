@@ -1,4 +1,16 @@
 GIT
+  remote: git://github.com/bbatsov/rubocop.git
+  revision: 2e64123f2f61516dcc9776eba0ccfda87a998afb
+  ref: 2e64123f2f61516dcc9776eba0ccfda87a998afb
+  specs:
+    rubocop (0.43.0)
+      parser (>= 2.3.1.1, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
+
+GIT
   remote: git://github.com/jonatack/will_paginate.git
   revision: 3c861498bdbc643638c1f25bdbe67f93d03be79b
   specs:
@@ -75,7 +87,7 @@ GEM
     addressable (2.3.8)
     arel (7.1.2)
     ast (2.3.0)
-    autoprefixer-rails (6.4.1.1)
+    autoprefixer-rails (6.5.0)
       execjs
     awesome_print (1.7.0)
     axiom-types (0.1.1)
@@ -86,7 +98,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.2)
-    bullet (5.4.1)
+    bullet (5.4.2)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     bundler-audit (0.5.0)
@@ -266,12 +278,6 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rubocop (0.43.0)
-      parser (>= 2.3.1.1, < 3.0)
-      powerpack (~> 0.1)
-      rainbow (>= 1.99.1, < 3.0)
-      ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -313,7 +319,7 @@ GEM
       activesupport (>= 3)
       rails (>= 3)
     temple (0.7.7)
-    term-ansicolor (1.3.2)
+    term-ansicolor (1.4.0)
       tins (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.5)
@@ -376,7 +382,7 @@ DEPENDENCIES
   reek
   rollbar (~> 2.7.1)
   rspec-rails (~> 3.5.2)
-  rubocop
+  rubocop!
   sass-rails (~> 5.0)
   shoulda-matchers
   sidekiq (= 4.2.1)

@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 module VenuesHelper
   def action
@@ -18,29 +19,31 @@ module VenuesHelper
   end
 
   def display_sort_column_headers(search)
-    res = venue_column_headers.reduce(String.new) do |string, field|
-      string << (content_tag('th', sort_link(search, field, {}, method: action)))
-    end \
-    + content_tag('th', 'Menus Count') \
-    + content_tag('th', 'Show Menus') \
-    + content_tag('th', 'Show Events')
+    res = \
+      venue_column_headers.reduce(String.new) do |string, field|
+        string << content_tag('th', sort_link(search, field, {}, method: action))
+      end \
+      + content_tag('th', 'Menus Count') \
+      + content_tag('th', 'Show Menus') \
+      + content_tag('th', 'Show Events')
 
     res.html_safe
   end
 
   def display_search_results(objects)
     objects.limit(results_limit).reduce(String.new) do |string, object|
-      string << (content_tag('tr', display_search_results_row(object)))
+      string << content_tag('tr', display_search_results_row(object))
     end.html_safe
   end
 
   def display_search_results_row(object)
-    res = venue_column_fields.reduce(String.new) do |string, field|
-      string << (content_tag('td', object.send(field)))
-    end \
-    + content_tag('td', object.menus.size) \
-    + content_tag('td', link_to('==>', venue_menus_path(object))) \
-    + content_tag('td', object.menus.size)
+    res = \
+      venue_column_fields.reduce(String.new) do |string, field|
+        string << content_tag('td', object.send(field))
+      end \
+      + content_tag('td', object.menus.size) \
+      + content_tag('td', link_to('==>', venue_menus_path(object))) \
+      + content_tag('td', object.menus.size)
 
     res .html_safe
   end
@@ -62,16 +65,15 @@ module VenuesHelper
     tag.p('SQL:') + tag.code(users.to_sql)
   end
 
-
   def xdisplay_menu_search_results(objects)
     objects.limit(results_limit).reduce(String.new) do |string, object|
-      string << (content_tag('tr', display_menu_search_results_row(object)))
+      string << content_tag('tr', display_menu_search_results_row(object))
     end.html_safe
   end
 
   def xdisplay_menu_search_results_row(object)
     res = menu_column_fields.reduce(String.new) do |string, field|
-      string << (content_tag('td', object.send(field)))
+      string << content_tag('td', object.send(field))
     end
 
     res .html_safe

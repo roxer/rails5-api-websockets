@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 class MessagesController < ApplicationController
   # GET /messages
@@ -10,7 +11,7 @@ class MessagesController < ApplicationController
   # GET /messages/1.json
   def show
   rescue ActiveRecord::RecordNotFound
-    render json: { error: "not found" }, status: 404
+    render json: {error: "not found"}, status: 404
   end
 
   #######################################################################################

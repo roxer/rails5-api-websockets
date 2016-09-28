@@ -1,6 +1,8 @@
+# encoding: utf-8
 # frozen_string_literal: true
 json.array!(@api_v1_shapes) do |api_v1_shape|
-  json.extract! api_v1_shape, :id, :label, :shape_type, :canvas_id,
-                              :pos_x, :pos_y, :descriptors, :created_at, :updated_at
+  json.extract! api_v1_shape,
+                :id, :label, :shape_type, :canvas_id,
+                :pos_x, :pos_y, :descriptors, :created_at, :updated_at
   # json.url api_v1_shape_url(api_v1_shape, format: :json)
 end

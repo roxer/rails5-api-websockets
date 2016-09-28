@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 json.array!(@api_v1_canvases) do |api_v1_canvas|
   json.extract! api_v1_canvas, :id, :name, :diagram_id

@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 # app/channels/appearance_channel.rb
 class DiagramChannel < ApplicationCable::Channel

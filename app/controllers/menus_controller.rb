@@ -1,14 +1,12 @@
+# encoding: utf-8
 # frozen_string_literal: true
 class MenusController < ApplicationController
-
   def index
     @search = ransack_params
     @menus = ransack_result
 
-    # REVIEW export to json if user opts to with checkbox
-    if (params[:q][:json_export].to_i == 1 rescue false)
-      render formats: :json
-    end
+    # REVIEW: export to json if user opts to with checkbox
+    render formats: :json if (params[:q][:json_export].to_i == 1 rescue false)
   end
 
   private
@@ -16,17 +14,17 @@ class MenusController < ApplicationController
   def ransack_params
     q = params[:q]
 
-    # REVIEW limit results with nested resources
-    if venue_id = params[:venue_id]
+    # REVIEW: limit results with nested resources
+    if (venue_id = params[:venue_id])
       Menu.joins(:menus_venues)
           .where(menus_venues: {venue_id: venue_id})
           .ransack(q)
 
-    elsif event_id = params[:event_id]
+    elsif (event_id = params[:event_id])
       Menu.where(event_id: event_id)
           .ransack(q)
 
-    elsif place_id = params[:place_id]
+    elsif (place_id = params[:place_id])
       Menu.where(place_id: place_id)
           .ransack(q)
 
@@ -48,5 +46,4 @@ class MenusController < ApplicationController
   def menu_params
     params.fetch(:menu, {})
   end
-
 end

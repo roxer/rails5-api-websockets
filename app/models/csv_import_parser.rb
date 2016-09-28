@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 require 'csv'
 require 'parallel'
@@ -17,50 +18,51 @@ class CSVImportParser
   def process
     mi_path = data_file.menu_item.current_path
     di_path = data_file.dish.current_path
-    system("split -l 50000 #{mi_path} ./tmp/mi_") # REVIEW split big files
+    system("split -l 50000 #{mi_path} ./tmp/mi_") # REVIEW: split big files
     system("split -l 40000 #{di_path} ./tmp/di_")
     clear_db
 
-    # REVIEW order is important to have foreign keys validation
+    # REVIEW: order is important to have foreign keys validation
     dependency_hash = TsortableHash[
                         dish:      [],
                         menu:      [],
                         menu_item: [:dish, :menu_page],
-                        menu_page: [:menu], # REVIEW prefere comma to keep keys sorted
+                        menu_page: [:menu], # REVIEW: prefere comma to keep keys sorted
                       ]
 
     dependency_hash.tsort.each do |table|
       broadcast("started", "processing table #{table} ...")
-      self.send("import_#{table}") # REVIEW easy to maintain dependencies
+      self.send("import_#{table}") # REVIEW: easy to maintain dependencies
       broadcast("finished", "processing table #{table} ...")
     end
 
   ensure
-    system("rm ./tmp/{mi,di}_*") # REVIEW ensure you have cleaned up
+    system("rm ./tmp/{mi,di}_*") # REVIEW: ensure you have cleaned up
   end
 
   private
 
   def broadcast(action, text)
     t   = Time.now.strftime("%H-%M-%S")
-    msg = { action: { event: action, type: 'import' }, body: "#{t} #{text}" }.to_json
+    msg = {action: {event: action, type: 'import'}, body: "#{t} #{text}"}.to_json
     ActionCable.server.broadcast("data_file_#{data_file.id}", msg)
   end
 
   def import_dish
-    # REVIEW Dir.glob isn't thread safe so it is useless
+    # REVIEW: Dir.glob isn't thread safe so it is useless
     # chunks = Dir.glob(File.join(Rails.root, 'tmp','di_*'))
 
     path   = File.join(Rails.root, 'tmp')
     chunks = Dir.entries(path).select { |i| i =~ /^di_/ }
 
-    Parallel.each(chunks, in_processes: PROCESSES) do |chunk| # REVIEW
+    # REVIEW: parallel procesing
+    Parallel.each(chunks, in_processes: PROCESSES) do |chunk|
       dish_worker(chunk: chunk)
     end
 
-    ActiveRecord::Base.connection.reconnect! # HACK Paraller issue workaround
+    ActiveRecord::Base.connection.reconnect! # HACK: Paraller issue workaround
   rescue
-    ActiveRecord::Base.connection.reconnect! # HACK Paraller issue workaround
+    ActiveRecord::Base.connection.reconnect! # HACK: Paraller issue workaround
   end
 
   def import_menu
@@ -69,15 +71,16 @@ class CSVImportParser
 
     file = data_file.menu.current_path
 
-    CSV.foreach(file, {headers: false}) do |row|
+    CSV.foreach(file, headers: false) do |row|
       next unless row_valid?(row: row, cols: Menu::COLS[0...-2])
 
-      # REVIEW
+      # REVIEW: extract fiels for relations
       %i(event_orig venue_orig place_orig).each do |p|
-        p_id = extract_field(
-                 row:   row[Menu::COLS.index(p)],
-                 field: p
-               )
+        p_id = \
+          extract_field(
+            row:   row[Menu::COLS.index(p)],
+            field: p
+          )
 
         case p
         when :place_orig
@@ -128,7 +131,7 @@ class CSVImportParser
       Menu.import(
         Menu::COLS,
         rows,
-        on_duplicate_key_update: Menu::COLS.drop(1), # REVIEW overwrite duplicate keys
+        on_duplicate_key_update: Menu::COLS.drop(1), # REVIEW: overwrite duplicate keys
         batch_size:              10_000,
         validate:                false,
         timestamps:              true
@@ -150,9 +153,9 @@ class CSVImportParser
   def import_menu_page
     file = data_file.menu_page.current_path
     rows = []
-    menu_ids = Menu.order(:id).ids # REVIEW for binary search
+    menu_ids = Menu.order(:id).ids # REVIEW: for binary search
 
-    CSV.foreach(file, {headers: false}) do |row|
+    CSV.foreach(file, headers: false) do |row|
       rows << row if row_valid?(row: row, cols: MenuPage::COLS, menu_id: menu_ids)
     end
 
@@ -169,11 +172,11 @@ class CSVImportParser
 
   def import_menu_item
     menu_page_ids = MenuPage.order(:id).ids
-    dish_ids      = Dish.order(:id).pluck(:id) # REVIEW the same as above (.ids)
+    dish_ids      = Dish.order(:id).pluck(:id) # REVIEW: the same as above (.ids)
     path          = File.join(Rails.root, 'tmp')
     chunks        = Dir.entries(path).select { |i| i =~ /^mi_/ }
 
-    Parallel.each(chunks, in_processes: PROCESSES) do |chunk| # REVIEW
+    Parallel.each(chunks, in_processes: PROCESSES) do |chunk|
       menu_item_worker(
         chunk:         chunk,
         menu_page_ids: menu_page_ids,
@@ -181,9 +184,9 @@ class CSVImportParser
       )
     end
 
-    ActiveRecord::Base.connection.reconnect! # HACK Paraller issue workaround
+    ActiveRecord::Base.connection.reconnect! # HACK: Paraller issue workaround
   rescue
-    ActiveRecord::Base.connection.reconnect! # HACK Paraller issue workaround
+    ActiveRecord::Base.connection.reconnect! # HACK: Paraller issue workaround
   end
 
   def menu_item_worker(chunk:, menu_page_ids:, dish_ids:)
@@ -191,9 +194,9 @@ class CSVImportParser
 
     rows = []
     file = File.join(Rails.root, 'tmp', chunk)
-    data = CSV.read(file, {row_sep: "\n",
-                           col_sep: ",",
-                           headers: false})
+    data = CSV.read(file, row_sep: "\n",
+                          col_sep: ",",
+                          headers: false)
 
     data.each do |row|
       rows << row if row_valid?(row:           row,
@@ -220,9 +223,9 @@ class CSVImportParser
 
     rows = []
     file = File.join(Rails.root, 'tmp', chunk)
-    data = CSV.read(file, {row_sep: "\n",
-                           col_sep: ",",
-                           headers: false})
+    data = CSV.read(file, row_sep: "\n",
+                          col_sep: ",",
+                          headers: false)
 
     data.each do |row|
       rows << row if row_valid?(row:  row,
@@ -246,7 +249,7 @@ class CSVImportParser
   def row_valid?(row:, cols:, **options)
     return false if row.size != cols.size || row.first.to_i <= 0
 
-    # REVIEW
+    # REVIEW: use binary search to discard bad rows
     options.each do |key, val|
       idx = cols.index(key)
       return false unless val.bsearch { |x| row[idx].to_i - x }
@@ -260,14 +263,14 @@ class CSVImportParser
   def extract_field(row:, field:)
     return nil unless row
     row.upcase!
-    row.tr!('()[]{}?.', '') # REVIEW
+    row.tr!('()[]{}?.', '') # REVIEW: faster than gsub
     row.strip!
     return nil if row.blank?
 
     if field == :venue_orig
-      res = row.split(%r{[,;:]\s*})
+      res = row.split(/[,;:]\s*/)
                .map(&:strip)
-               .reject { |r| r == 'NULL' } # REVIEW
+               .reject { |r| r == 'NULL' } # REVIEW: ignore NULL values
 
       ids = []
       res.each do |v|
@@ -296,11 +299,10 @@ class CSVImportParser
 end
 
 class TsortableHash < Hash
- include TSort
+  include TSort
+  alias tsort_each_node each_key
 
- alias tsort_each_node each_key
-
- def tsort_each_child(node, &block)
-   fetch(node).each(&block)
- end
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
+  end
 end

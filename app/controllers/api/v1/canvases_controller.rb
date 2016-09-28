@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 class Api::V1::CanvasesController < ApplicationController
   before_action :set_api_v1_canvas, only: [:show, :edit, :update, :destroy]
@@ -16,8 +17,8 @@ class Api::V1::CanvasesController < ApplicationController
   # GET /api/v1/canvases
   # GET /api/v1/canvases.json
   def index
-    @api_v1_canvases = Api::V1::Canvas.all
-    render json: @api_v1_canvases
+    @api_v1canvases = Api::V1::Canvas.all
+    render json: @api_v1canvases
   end
 
   swagger_api :show do
@@ -110,7 +111,7 @@ class Api::V1::CanvasesController < ApplicationController
       end
 
       format.json do
-        msg = { id: id }
+        msg = {id: id}
         broadcast("deleted", msg)
         head :no_content
       end
@@ -140,7 +141,7 @@ class Api::V1::CanvasesController < ApplicationController
   end
 
   def broadcast(action, msg)
-    msg = { action: { event: action, type: 'canvas' }, body: msg }.to_json
+    msg = {action: {event: action, type: 'canvas'}, body: msg}.to_json
     ActionCable.server.broadcast(@diagram, msg)
   end
 end

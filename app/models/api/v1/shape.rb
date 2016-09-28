@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 require 'json-schema'
 
@@ -7,19 +8,19 @@ class Api::V1::Shape < ActiveRecord::Base
   JSON_SCHEMA = Rails.root.join('spec', 'support', 'api', 'schemas').to_s
 
   validates :label, on: [:create, :update],
-                    uniqueness: { case_sensitive: false,
-                                  scope: :canvas_id,
-                                  message: 'has already been taken' }
+                    uniqueness: {case_sensitive: false,
+                                 scope: :canvas_id,
+                                 message: 'has already been taken'}
   validates :label, presence: true
   validates :pos_x, presence: true
   validates :pos_y, presence: true
-  validates :pos_x, numericality: { only_integer: true }
-  validates :pos_y, numericality: { only_integer: true }
+  validates :pos_x, numericality: {only_integer: true}
+  validates :pos_y, numericality: {only_integer: true}
   validates :descriptors, presence: true
-            # json: { message: ->(errors) { errors }, schema: -> { check_descriptors } }
+  # json: { message: ->(errors) { errors }, schema: -> { check_descriptors } }
   validates :shape_type, presence: true
-  validates :shape_type, inclusion: { in: %w(Circle Rectangle),
-                                      message: "%{value} is not a valid shape type" }
+  validates :shape_type, inclusion: {in: %w(Circle Rectangle),
+                                     message: "%{value} is not a valid shape type"}
   validates :canvas_id, presence: true
   validate  :check_descriptors
 
@@ -31,7 +32,6 @@ class Api::V1::Shape < ActiveRecord::Base
       end
     end
   rescue
-    nil # TODO:
+    nil # TODO: ...
   end
-
 end

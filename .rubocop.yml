@@ -1,6 +1,22 @@
 # This is the configuration used to check the rubocop source code.
 
+Documentation:
+  Enabled: false
+
+StringLiterals:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+Style/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
 Style/Encoding:
+  EnforcedStyle: always
+  Enabled: true
+
+Style/RescueModifier:
   Enabled: false
 
 Style/HashSyntax:
@@ -12,8 +28,28 @@ Style/ClassAndModuleChildren:
 Metrics/LineLength:
   Max: 90
 
-StringLiterals:
-  Enabled: false
+# Offense count: 75
+Metrics/AbcSize:
+  Max: 28
+
+# Offense count: 32
+# Configuration parameters: CountComments.
+Metrics/ClassLength:
+  Max: 268
+
+# Offense count: 28
+Metrics/CyclomaticComplexity:
+  Max: 7
+
+# Offense count: 143
+# Configuration parameters: CountComments.
+Metrics/MethodLength:
+  Max: 34
+
+# Offense count: 11
+# Configuration parameters: CountComments.
+Metrics/ModuleLength:
+  Max: 256
 
 AllCops:
   Exclude:
@@ -24,3 +60,8 @@ AllCops:
     - 'script/**/*'
     - 'vendor/**/*'
     - 'spec/fixtures/**/*'
+  TargetRubyVersion: 2.3
+  # Cop names are not d§splayed in offense messages by default. Change behavior
+  # by overriding DisplayCopNames, or by giving the -D/--display-cop-names
+  # option.
+  DisplayCopNames: true

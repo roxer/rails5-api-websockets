@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 module MenusHelper
   def action
@@ -18,23 +19,25 @@ module MenusHelper
   end
 
   def display_menu_sort_column_headers(search)
-    res = menu_column_headers.reduce(String.new) do |string, field|
-      string << (content_tag('th', sort_link(search, field, {}, method: action)))
-    end
+    res = \
+      menu_column_headers.reduce(String.new) do |string, field|
+        string << content_tag('th', sort_link(search, field, {}, method: action))
+      end
 
     res.html_safe
   end
 
   def display_menu_search_results(objects)
     objects.limit(results_limit).reduce(String.new) do |string, object|
-      string << (content_tag('tr', display_menu_search_results_row(object)))
+      string << content_tag('tr', display_menu_search_results_row(object))
     end.html_safe
   end
 
   def display_menu_search_results_row(object)
-    res = menu_column_fields.reduce(String.new) do |string, field|
-      string << (content_tag('td', object.send(field)))
-    end
+    res = \
+      menu_column_fields.reduce(String.new) do |string, field|
+        string << content_tag('td', object.send(field))
+      end
 
     res .html_safe
   end
@@ -55,6 +58,4 @@ module MenusHelper
   def display_query_sql(object)
     tag.p('SQL:') + tag.code(object.to_sql)
   end
-
-
 end

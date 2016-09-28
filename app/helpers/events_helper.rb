@@ -1,3 +1,4 @@
+# encoding: utf-8
 # frozen_string_literal: true
 module EventsHelper
   def action
@@ -18,27 +19,29 @@ module EventsHelper
   end
 
   def display_event_sort_column_headers(search)
-    res = event_column_headers.reduce(String.new) do |string, field|
-            string << (content_tag('th', sort_link(search, field, {}, method: action)))
-          end \
-          + content_tag('th', 'Menus Count') \
-          + content_tag('th', 'Show Menus')
+    res = \
+      event_column_headers.reduce(String.new) do |string, field|
+        string << content_tag('th', sort_link(search, field, {}, method: action))
+      end \
+      + content_tag('th', 'Menus Count') \
+      + content_tag('th', 'Show Menus')
 
     res.html_safe
   end
 
   def display_event_search_results(objects)
     objects.limit(results_limit).reduce(String.new) do |string, object|
-      string << (content_tag('tr', display_event_search_results_row(object)))
+      string << content_tag('tr', display_event_search_results_row(object))
     end.html_safe
   end
 
   def display_event_search_results_row(object)
-    res = event_column_fields.reduce(String.new) do |string, field|
-            string << (content_tag('td', object.send(field)))
-          end \
-          + content_tag('td', object.menus.size) \
-          + content_tag('td', link_to('==>', event_menus_path(object)))
+    res = \
+      event_column_fields.reduce(String.new) do |string, field|
+        string << content_tag('td', object.send(field))
+      end \
+      + content_tag('td', object.menus.size) \
+      + content_tag('td', link_to('==>', event_menus_path(object)))
 
     res .html_safe
   end
@@ -59,5 +62,4 @@ module EventsHelper
   def display_query_sql(users)
     tag.p('SQL:') + tag.code(users.to_sql)
   end
-
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MenuPage < ApplicationRecord
   mount_uploader :datafile, MenuPageUploader
   belongs_to :menu

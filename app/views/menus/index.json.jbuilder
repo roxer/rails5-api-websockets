@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 json.menus @search.result do |menu|
   json.extract! menu,
     :id,

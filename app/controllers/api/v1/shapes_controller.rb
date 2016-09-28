@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Api::V1::ShapesController < ApplicationController
   before_action :set_api_v1_shape, only: [:show, :edit, :destroy]
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module VenuesHelper
   def action
     if action_name == 'advanced_search'

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json

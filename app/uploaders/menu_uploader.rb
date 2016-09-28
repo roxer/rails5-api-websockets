@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MenuUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:

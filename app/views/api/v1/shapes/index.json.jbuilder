@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 json.array!(@api_v1_shapes) do |api_v1_shape|
   json.extract! api_v1_shape, :id, :label, :shape_type, :canvas_id,
                               :pos_x, :pos_y, :descriptors, :created_at, :updated_at

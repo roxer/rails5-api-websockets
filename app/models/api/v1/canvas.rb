@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Api::V1::Canvas < ActiveRecord::Base
   belongs_to :diagram
   has_many :shapes, dependent: :destroy

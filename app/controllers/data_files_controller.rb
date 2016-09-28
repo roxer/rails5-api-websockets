@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class DataFilesController < ApplicationController
   before_action :set_data_file, only: [:show]
 

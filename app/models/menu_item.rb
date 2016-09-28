@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MenuItem < ApplicationRecord
   mount_uploader :datafile, MenuItemUploader
   belongs_to :dish

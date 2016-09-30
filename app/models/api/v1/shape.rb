@@ -3,7 +3,7 @@
 require 'json-schema'
 
 class Api::V1::Shape < ActiveRecord::Base
-  belongs_to :canvas
+  belongs_to :api_v1_canvas, class_name: 'Api::V1::Canvas', foreign_key: 'api_v1_canvas'
 
   JSON_SCHEMA = Rails.root.join('spec', 'support', 'api', 'schemas').to_s
 

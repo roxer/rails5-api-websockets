@@ -6,9 +6,9 @@ class CreateDishes < ActiveRecord::Migration[5.0]
       t.decimal :highest_price, precision: 6, scale: 2
       t.integer :last_appeared
       t.decimal :lowest_price, precision: 6, scale: 2
-      t.integer :menus_appeared
+      t.integer :menus_appeared_count
       t.string  :name
-      t.integer :times_appeared
+      t.integer :times_appeared_count
 
       t.timestamps
     end

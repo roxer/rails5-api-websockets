@@ -5,7 +5,7 @@ class CreateVenues < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index(:venues, :name, unique: true)
 
+    add_index(:venues, :name, unique: true)
   end
 end

@@ -5,7 +5,8 @@ class CreateStatuses < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
+    add_index(:statuses, :name, unique: true)
   end
 
-  add_index(:statuses, :name, unique: true)
 end

@@ -1,7 +1,7 @@
-class CreateMenusVenuesJoinTable < ActiveRecord::Migration[5.0]
+class CreateMenuVenuesJoinTable < ActiveRecord::Migration[5.0]
   def change
     create_join_table :menus, :venues do |t|
-      t.references :menu, foreign_key: true
+      t.references :menu,  foreign_key: true
       t.references :venue, foreign_key: true
     end
 

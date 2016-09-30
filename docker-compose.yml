@@ -4,20 +4,20 @@ version: '2'
 services:
   # Our Postgresql service:
   postgres:
-    container_name: postgres
+    container_name: postgres_mst
     image: postgres
     environment:
       # LC_ALL: pl_PL.UTF-8
       POSTGRES_PASSWORD: 3x1mpl3
       POSTGRES_DB: example_db
     ports:
-      - '5432:5432' # Bind host port 5432 to PostgreSQL port 5432
+      - '5435:5432' # Bind host port 5432 to PostgreSQL port 5432
     volumes:
       - 'postgres:/var/lib/postgresql/data'
 
   # Our Redis service:
   redis:
-    container_name: redis
+    container_name: redis_mst
     image: 'redis:3.2-alpine'
     command: redis-server --requirepass yourpassword
     ports:
@@ -28,7 +28,7 @@ services:
   # Application: --------------------------------------------------------------------------
   # We'll also use this configuration (&app_base) for the websocket server and sidekiq
   web: &app_base
-    container_name: web
+    container_name: web_mst
     depends_on:
       - 'postgres'
       - 'redis'
@@ -41,12 +41,13 @@ services:
     links: &app_links
       - postgres:postgres.local
       - redis:redis.local
+      - cable:ws.local
     environment: &app_environment
       # PostgreSQL Development Database:
       DATABASE_URL: postgres://postgres:3x1mpl3@postgres.local:5432/example_db?pool=25&encoding=unicode&schema_search_path=public
 
       # Redis Database:
-      REDIS_URL: redis://redis.local:6379
+      REDIS_URL: redis://:yourpassword@redis.local:6379
       WS_URL: ws://ws.local:28080
 
       # Enable the byebug debugging server - this can be overriden
@@ -61,18 +62,20 @@ services:
   # Application: --------------------------------------------------------------------------
   # websocket server
   cable:
-    container_name: cable
+    container_name: cable_mst
     <<: *app_base
     command: bundle exec puma -b tcp://0.0.0.0:28080 cable/config.ru
     ports:
       - '28080:28080'
+    links:
+      - redis:redis.local
 
   sidekiq:
-    container_name: sidekiq
+    container_name: sidekiq_mst
     <<: *app_base
     ports:
       - '3100:3000' # Bind host port 3000 to app HTTP port 3000
-    command: sidekiq -C config/sidekiq.yml.erb
+    command: bundle exec sidekiq -C config/sidekiq.yml.erb
     links:
       - redis:redis.local
     volumes:

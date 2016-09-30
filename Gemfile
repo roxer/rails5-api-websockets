@@ -10,7 +10,7 @@ gem 'rails', '5.0.0.1'
 # gem 'rack', github: "rack/rack"
 gem 'sass-rails', '~> 5.0'
 # gem 'bootstrap', '~> 4.0.0.alpha4'
-gem 'bootstrap-sass', '~> 3.3.0'
+gem 'bootstrap-sass', '~> 3.3.7'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -86,6 +86,7 @@ group :development, :test do
   gem 'bullet'
   gem 'bundler-audit', require: false
   gem 'faker'
+  gem 'foreman'
 end
 
 group :development do

@@ -5,7 +5,7 @@ require 'parallel'
 require 'set'
 
 class CSVImportParser
-  attr_reader   :data_file
+  attr_reader   :data_file, :dependency_hash
   attr_accessor :fields
 
   PROCESSES = 4
@@ -13,6 +13,16 @@ class CSVImportParser
   def initialize(id)
     @data_file = DataFile.find(id)
     @fields = {event_orig: Set.new, place_orig: Set.new, venue_orig: Set.new}
+    @dependency_hash = TsortableHash[
+                         dish:        [],
+                         event:       [],
+                         menu:        [:event, :place],
+                         menu_item:   [:dish, :menu_page],
+                         menu_page:   [:menu],
+                         menus_venue: [:menu, :venue],
+                         place:       [],
+                         venue:       [], # REVIEW: prefere comma to keep keys sorted
+                       ]
   end
 
   def process
@@ -23,14 +33,9 @@ class CSVImportParser
     clear_db
 
     # REVIEW: order is important to have foreign keys validation
-    dependency_hash = TsortableHash[
-                        dish:      [],
-                        menu:      [],
-                        menu_item: [:dish, :menu_page],
-                        menu_page: [:menu], # REVIEW: prefere comma to keep keys sorted
-                      ]
-
     dependency_hash.tsort.each do |table|
+      next if table.in?([:event, :venue, :place, :menus_venue])
+
       broadcast("started", "processing table #{table} ...")
       self.send("import_#{table}") # REVIEW: easy to maintain dependencies
       broadcast("finished", "processing table #{table} ...")
@@ -287,14 +292,10 @@ class CSVImportParser
 
   def clear_db
     broadcast("started", "deleting data from tables")
-    MenusVenue.delete_all
-    Place     .delete_all
-    Venue     .delete_all
-    MenuItem  .delete_all
-    MenuPage  .delete_all
-    Menu      .delete_all
-    Event     .delete_all
-    Dish      .delete_all
+
+    dependency_hash.tsort.reverse.each do |table|
+      table.to_s.camelize.constantize.delete_all # REVIEW: dynamic delete in order
+    end
   end
 end
 

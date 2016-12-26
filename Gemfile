@@ -1,9 +1,9 @@
 # encoding: utf-8
 # frozen_string_literal: true
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.4.0'
 
-gem 'rails', '5.0.0.1'
+gem 'rails', '5.0.1'
 # gem 'sprockets-rails', github: "rails/sprockets-rails"
 # gem 'sprockets', github: "rails/sprockets"
 # gem 'arel', github: "rails/arel"
@@ -27,15 +27,17 @@ gem 'redis'
 gem 'rack-cors'
 gem 'coveralls', require: false
 gem 'activerecord_json_validator'
-gem 'sidekiq', '4.2.1'
+gem 'sidekiq', '4.2.7'
 gem 'activerecord-import'
 gem 'parallel'
 gem 'ransack'
 gem 'gon'
+gem 'oj'
+gem 'json', '~> 2.0'
 gem 'simple_form'
 gem 'will_paginate', github: 'jonatack/will_paginate'
 # gem 'paperclip', '5.1.0'
-gem 'carrierwave', '1.0.0.beta'
+gem 'carrierwave'
 # gem 'sinatra', '~> 1.4.7', require: false
 # gem 'smarter_csv'
 # gem 'fastercsv'
@@ -64,20 +66,20 @@ gem 'rails-controller-testing'
 
 group :production do
   gem 'skylight'
-  gem 'rollbar', '~> 2.7.1'
+  gem 'rollbar', '~> 2.14.0'
 end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'dotenv-rails'
-  gem 'byebug'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'simplecov', require: false
-  gem 'rubocop', github: 'bbatsov/rubocop',
-                 ref: '2e64123f2f61516dcc9776eba0ccfda87a998afb',
-                 require: false
+  gem 'rubocop'
+  # gem 'rubocop', github:  'bbatsov/rubocop',
+  #                ref:     '2e64123f2f61516dcc9776eba0ccfda87a998afb',
+  #                require: false
 
   gem 'reek', require: false
   gem 'yard', '~> 0.8.7.6'
@@ -100,7 +102,7 @@ group :development do
 
   # Loading the listen gem enables an evented file system monitor. Check
   # https://github.com/guard/listen#listen-adapters if on Windows or *BSD.
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.1.5'
 end
 
 group :test do

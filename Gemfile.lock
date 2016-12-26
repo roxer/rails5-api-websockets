@@ -372,6 +372,7 @@ DEPENDENCIES
   json (~> 2.0)
   json-schema
   listen (~> 3.1.5)
+  multi_json
   oj
   parallel
   pg

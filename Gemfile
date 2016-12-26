@@ -1,12 +1,15 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.4.0'
 
-gem 'rails', '5.0.0.1'
-gem 'sprockets-rails', github: "rails/sprockets-rails"
-gem 'sprockets', github: "rails/sprockets"
-gem 'sass-rails', github: "rails/sass-rails"
-gem 'arel', github: "rails/arel"
-gem 'rack', github: "rack/rack"
+gem 'rails', '5.0.1'
+# gem 'sprockets-rails', github: "rails/sprockets-rails"
+# gem 'sprockets', github: "rails/sprockets"
+# gem 'arel', github: "rails/arel"
+# gem 'rack', github: "rack/rack"
+gem 'sass-rails', '~> 5.0'
+# gem 'bootstrap', '~> 4.0.0.alpha4'
+gem 'bootstrap-sass', '~> 3.3.7'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -17,11 +20,26 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', github: "rails/coffee-rails"
 gem 'puma'
+gem 'hamlit'
 gem 'redis'
+# gem 'em-hiredis'
 gem 'rack-cors'
 gem 'coveralls', require: false
 gem 'activerecord_json_validator'
-gem 'sidekiq'
+gem 'sidekiq', '4.2.7'
+gem 'activerecord-import'
+gem 'parallel'
+gem 'ransack'
+gem 'gon'
+gem 'oj'
+gem 'json', '~> 2.0'
+gem 'simple_form'
+gem 'will_paginate', github: 'jonatack/will_paginate'
+# gem 'paperclip', '5.1.0'
+gem 'carrierwave'
+# gem 'sinatra', '~> 1.4.7', require: false
+# gem 'smarter_csv'
+# gem 'fastercsv'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -47,18 +65,21 @@ gem 'rails-controller-testing'
 
 group :production do
   gem 'skylight'
-  gem 'rollbar', '~> 2.7.1'
+  gem 'rollbar', '~> 2.14.0'
 end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'dotenv-rails'
-  gem 'byebug'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'simplecov', require: false
-  gem 'rubocop', require: false
+  gem 'rubocop'
+  # gem 'rubocop', github:  'bbatsov/rubocop',
+  #                ref:     '2e64123f2f61516dcc9776eba0ccfda87a998afb',
+  #                require: false
+
   gem 'reek', require: false
   gem 'yard', '~> 0.8.7.6'
   gem 'factory_girl_rails'
@@ -66,6 +87,7 @@ group :development, :test do
   gem 'bullet'
   gem 'bundler-audit', require: false
   gem 'faker'
+  gem 'foreman'
 end
 
 group :development do
@@ -79,7 +101,7 @@ group :development do
 
   # Loading the listen gem enables an evented file system monitor. Check
   # https://github.com/guard/listen#listen-adapters if on Windows or *BSD.
-  # gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.1.5'
 end
 
 group :test do

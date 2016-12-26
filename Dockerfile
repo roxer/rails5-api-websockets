@@ -26,15 +26,15 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-ENV CONFIGURE_OPTS --disable-install-doc
+ENV     CONFIGURE_OPTS --disable-install-doc
 
 WORKDIR /app
-COPY Gemfile      /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
-RUN gem install bundler
-RUN bundle install  --binstubs --jobs 20 --retry 5
+COPY    Gemfile      /app/Gemfile
+COPY    Gemfile.lock /app/Gemfile.lock
+RUN     gem install bundler
+RUN     bundle install  --binstubs --jobs 20 --retry 5
 
-COPY . /app
+COPY    . /app
 
 # TODO: create user for app (other than root)
 
